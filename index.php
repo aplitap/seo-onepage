@@ -1,3 +1,4 @@
+
 <html>
 	<head>
 		<title>One page SEO tutorial</title>
@@ -54,7 +55,15 @@
 			  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
 			  crossorigin="anonymous"></script>
 		<script>
-			var baseUrl=window.location.href;
+			<?php
+				if(isset($_GET['page'])){
+					echo 'var selectedPage="'.$_GET['page'].'";';
+				}
+				else{
+					echo 'var selectedPage;';
+				}
+			?>
+			var baseUrl=
 			$(document).ready(function(){
 
 				$('.link').click(function(e){
@@ -64,8 +73,13 @@
 					var offsetTop=$(section).offset();
 					$(window).scrollTop(offsetTop.top);
 					console.log($(section).data("section-url"));
-					history.replaceState('null', $(section).data("section-title"), baseUrl+$(section).data("section-url"));
+					history.pushState('null', $(section).data("section-title"), 'index.php?page='+$(section).data("section-url"));
 				});
+
+				if(typeof selectedPage!='undefined'){
+					console.log("click");
+					$('a[data-url='+selectedPage+']').trigger("click");
+				}
 			});
 		</script>
 	</body>
