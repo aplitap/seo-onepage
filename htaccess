@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{REQUEST_URI} !^/seo-onepage/public/
+RewriteCond %{REQUEST_URI} !^/seo-onepage/api/
+RewriteRule ^(.*)$ seo-onepage/index.php [L]
+
+</IfModule>
+# Force search engines to use http://localhost:90/seo-onepage/
+#RewriteCond %{HTTP_HOST} !^http://localhost:90/seo-onepage/$
+#RewriteRule ^(.*) http://localhost:90/seo-onepage//$1 [R=301,L]
+
+# Specify search friendly URLs
+#RewriteRule ^contact$ /index.php?page=contact [L]
